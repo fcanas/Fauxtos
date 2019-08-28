@@ -10,28 +10,51 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
- 
+
     var body: some View {
+
         TabView(selection: $selection){
-            Text("First View")
+            
+            AllPhotos()
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("first")
-                        Text("First")
+                        Image(systemName: "photo.on.rectangle").font(Font.system(size: 22)) // wants .fill
+                        Text("All Photos")
                     }
-                }
-                .tag(0)
-            Text("Second View")
+            }
+            .tag(0)
+
+            Text("For You")
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image("second")
-                        Text("Second")
+                        Image(systemName: "suit.heart.fill").font(Font.system(size: 22))
+                        Text("For You")
                     }
-                }
-                .tag(1)
+            }
+            .tag(1)
+            Text("Albums")
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "rectangle.stack.fill").font(Font.system(size: 22))
+                        Text("Albums")
+                    }
+            }
+            .tag(2)
+
+            Text("Search")
+                .font(.title)
+                .tabItem {
+                    VStack {
+                        Image(systemName: "magnifyingglass").font(Font.system(size: 22))
+                        Text("Search")
+                    }
+            }
+            .tag(3)
         }
+
     }
 }
 

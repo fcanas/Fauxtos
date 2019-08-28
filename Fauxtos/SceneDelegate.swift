@@ -9,6 +9,15 @@
 import UIKit
 import SwiftUI
 
+class HVC: UIHostingController<ContentView> {
+
+//    override func viewLayoutMarginsDidChange() {
+//        super.viewLayoutMarginsDidChange()
+//        view.insetsLayoutMarginsFromSafeArea = false
+//    }
+
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -25,7 +34,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            let hvc =  HVC(rootView: contentView)
+
+            window.rootViewController = hvc
             self.window = window
             window.makeKeyAndVisible()
         }

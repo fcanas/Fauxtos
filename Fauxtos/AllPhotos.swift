@@ -48,7 +48,8 @@ struct AllPhotos: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-            }.padding()
+                            .padding()
+            }
         }
     }
 }
@@ -67,15 +68,40 @@ let allImages = [["rikki-chan-B8ZFV4E0YOw-unsplash",
                   "kevin-crosby-pqV9L0IThCI-unsplash",],
                  ["gerson-repreza-hniuowbXbBY-unsplash",
                   "benjamin-voros-jv15x2Gs5F8-unsplash",
-                  "dawn-armfield-R9S19dOFlcs-unsplash"]]
+                  "dawn-armfield-R9S19dOFlcs-unsplash"],
+                 ["sankalp-sharma-S2AIYYVyBLc-unsplash",
+                  "nicolas-hoizey-hfIMkIcIq_k-unsplash",
+                  "mark-hang-fung-so--qDAqOS_Chk-unsplash",],
+                 ["senor-sosa-9Kh9K2Cc5y0-unsplash",
+                  "brayden-law-F6YJRn46SMM-unsplash",
+                  "joel-fulgencio-pXKW6bBwsnA-unsplash",],
+                 //                 ["airam-dato-on-5AgkxBHhXg8-unsplash",
+    //                  "jamie-street-8_xzhWgK9wo-unsplash",
+    //                  "ethan-lee-RxpOfYtpoa0-unsplash",]
+]
 
 struct PhotoList: View {
     var images: [[String]] = allImages
     var body: some View {
-        List {
-            ForEach(images, id: \.self) { i in
-                PhotoRow(images: i)
-            }.aspectRatio(3, contentMode: .fit)
+        GeometryReader { geometry in
+            ScrollView {
+                VStack {
+                    ForEach(self.images, id: \.self) { i in
+                        PhotoRow(images: i)
+                    }.aspectRatio(3, contentMode: .fit)
+                    //                        .frame(width: geometry.size.width, alignment: .top)
+                    // Acts as a content inset.
+                    // I think we want to inject this from the environment
+                    // The environment (zstack) would have it propagated from within, as the height
+                    // of 
+                    Spacer().frame(height: 60, alignment: .center)
+                }
+                    //                .frame(width: geometry.size.width, alignment: .top)
+                    // I don't like this.
+                    .frame(width: geometry.size.width, height: (geometry.size.width / 3) * CGFloat(self.images.count) , alignment: .top)
+            }
+            //            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
+
         }
     }
 }

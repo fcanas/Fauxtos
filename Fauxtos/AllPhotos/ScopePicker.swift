@@ -8,17 +8,17 @@
 
 import SwiftUI
 
+/// Defines a Picker that selects one of a union of "scopes" for changing how photos are displayed.
 struct ScopePicker: View {
 
-    enum Scope: CaseIterable, Hashable, Identifiable {
-
-        var id: Scope { self }
+    enum Scope: CaseIterable, Hashable {
 
         case years
         case months
         case days
         case all
 
+        // TODO: is this remotely correct, or are there better, more accessible ways?
         var name: String {
             switch self {
 
@@ -34,31 +34,43 @@ struct ScopePicker: View {
         }
     }
 
+    // TODO: How do I propagate the state up to the "Collection View" of
+    // photos? Does that need to go in the @EnvironmentObject, or can
+    // @State properties be propagated up further?
     @State var scope: Scope = .all
     @EnvironmentObject var layout: SharedLayout
 
     var body: some View {
+        // TODO:
         // I would like to use a geometry reader to get the height of the picker to inject into the shared layout
         // but I'm encountering two problems:
         // 1: wrapping the picker in a GeometryReader seems to expand the size the picker occupies:
         // 2: when the ScrollView in the photos scroller reads the value, it won't have been set by this or
         //    any descendent components. So it'll be 0. And the value won't be re-read when it updates.
+
+        // Code left commented below for convenient uncommenting, and as a guide for things I've tried.
+
         //        GeometryReader { geometry in
         //        Group {// geometry in
         Picker(selection: self.$scope, label: EmptyView()) {
             ForEach(Scope.allCases, id: \.self) { s in
-                Text(s.name).tag(s)
+                Text(s.name)
+                    .tag(s)
             }
         }
         .pickerStyle(SegmentedPickerStyle())
         .padding()
         .fixedSize()
-//        .onAppear {
-//            self.layout.pickerHeight = geometry.size.height
-//        }
+        //        .onAppear {
+        //            self.layout.pickerHeight = geometry.size.height
+        //        }
         //        }
         //        }
         //                .padding(0)
     }
 
+}
+
+extension ScopePicker.Scope : Identifiable {
+    var id: ScopePicker.Scope { self }
 }

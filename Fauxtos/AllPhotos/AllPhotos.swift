@@ -9,7 +9,15 @@
 import SwiftUI
 
 class SharedLayout: ObservableObject {
-    // Ideally, we'd be setting this and propagating it dynamically.
+    /// The height of the scope picker for the All Photos tab. Used to create
+    /// a "content inset" for the photos view.
+    /// ---!!!HACK!!!---
+    /// Ideally, we'd be setting this and propagating it dynamically.
+    /// Also, the height of 0.5 here is bizarre. The scrolling content's
+    /// bottom jumps up above the picker view with seemingly _any_ positive
+    /// value here. Values more than the picker height do push the photos
+    /// up father. But values less than the height don't make the area too
+    /// small.
     var pickerHeight: CGFloat = 0.5
 }
 
@@ -21,7 +29,8 @@ struct AllPhotos: View {
         ZStack{
             PhotoList()
             VStack {
-                Header().environment(\.colorScheme, .dark)
+                Header()
+                    .environment(\.colorScheme, .dark)
                 Spacer()
                 ScopePicker()
             }
@@ -40,9 +49,17 @@ struct Header: View {
     var body: some View {
         Group {
             VStack {
-                Spacer(minLength: 45) // how do I make the background ignore safe insets, but subviews respect them again?
+                // ---!!!HACK!!!---
+                // how do I make the background ignore safe insets, but subviews respect them again?
+                // We want the gradient to extend to the edge of the screen. But then we want the
+                // contained text to respect safe area insets.
+                // Maybe the gradient should be in a ZStack?
+                Spacer(minLength: 45)
                 HStack {
-                    Text("\(Header.formatter.string(from: Date()))").font(Font.largeTitle.bold())
+                    // TODO: Make a model for photos that includes date
+                    // information that can be displayed here.
+                    Text("\(Header.formatter.string(from: Date()))")
+                        .font(Font.largeTitle.bold())
                     Spacer()
                     Button(action: {
                         
@@ -56,16 +73,15 @@ struct Header: View {
                             .foregroundColor(Color("PillButton"))
                     }
                 }
-                //                .padding()
                 HStack{
-                    Text("Hong Kong").font(Font.subheadline.bold())
+                    // TODO: Make a model for photos that includes location
+                    // information that can be displayed here.
+                    Text("Hong Kong")
+                        .font(Font.subheadline.bold())
                     Spacer()
                 }
-                //                .padding()
-
             }
         }
-        .edgesIgnoringSafeArea([])
         .padding()
         .background(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), .clear]), startPoint: .top, endPoint: .bottom))
         .edgesIgnoringSafeArea(.top)

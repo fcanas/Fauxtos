@@ -17,11 +17,14 @@ struct ContentView: View {
 
         TabView(selection: $selection){
             
-            AllPhotos().environmentObject(layout)
+            AllPhotos()
+                .environmentObject(layout)
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image(systemName: "photo.on.rectangle").font(Font.system(size: 22)) // wants .fill
+                        // TODO: This SFSymbol wants .fill, but it's been missing for the last few betas
+                        Image(systemName: "photo.on.rectangle")
+                            .font(Font.system(size: 22))
                         Text("All Photos")
                     }
             }
@@ -31,7 +34,8 @@ struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image(systemName: "suit.heart.fill").font(Font.system(size: 22))
+                        Image(systemName: "suit.heart.fill")
+                            .font(Font.system(size: 22))
                         Text("For You")
                     }
             }
@@ -40,7 +44,8 @@ struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image(systemName: "rectangle.stack.fill").font(Font.system(size: 22))
+                        Image(systemName: "rectangle.stack.fill")
+                            .font(Font.system(size: 22))
                         Text("Albums")
                     }
             }
@@ -50,7 +55,8 @@ struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        Image(systemName: "magnifyingglass").font(Font.system(size: 22))
+                        Image(systemName: "magnifyingglass")
+                            .font(Font.system(size: 22))
                         Text("Search")
                     }
             }

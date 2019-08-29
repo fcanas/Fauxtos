@@ -45,11 +45,15 @@ struct PhotoList: View {
                             PhotoRow(images: i)
                     }
 
+                    // ---!!!HACK!!!---
                     // Acts as a content inset for the containing scroll view.
-                    // I think we want to inject this from the environment
+                    // I think we want to inject this from the environment.
                     // The environment (zstack) would have it propagated from within, as the height
-                    // of
-                    Spacer(minLength: self.layout.pickerHeight)//.frame(height: self.layout.pickerHeight + 400, alignment: .center)
+                    // of the scope picker. -- It looks kiind of right, but if we do actually write
+                    // to the environment from the picker (which we're currently not), the Spacer
+                    // is initialized with the initial value of the height, and is not updated
+                    // until the tab is reloaded.
+                    Spacer(minLength: self.layout.pickerHeight)
                 }
             }
         }

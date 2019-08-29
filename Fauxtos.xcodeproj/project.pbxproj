@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E720C32E231739540044C5D5 /* ScopePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720C32D231739540044C5D5 /* ScopePicker.swift */; };
+		E720C330231739800044C5D5 /* PhotoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E720C32F231739800044C5D5 /* PhotoList.swift */; };
 		E7933B1D2315E6D000ADC37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7933B1C2315E6D000ADC37F /* AppDelegate.swift */; };
 		E7933B1F2315E6D000ADC37F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7933B1E2315E6D000ADC37F /* SceneDelegate.swift */; };
 		E7933B212315E6D000ADC37F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7933B202315E6D000ADC37F /* ContentView.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E720C32D231739540044C5D5 /* ScopePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScopePicker.swift; sourceTree = "<group>"; };
+		E720C32F231739800044C5D5 /* PhotoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoList.swift; sourceTree = "<group>"; };
 		E7933B192315E6D000ADC37F /* Fauxtos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fauxtos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7933B1C2315E6D000ADC37F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7933B1E2315E6D000ADC37F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E720C32C231739420044C5D5 /* AllPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				E7933B502315EE5800ADC37F /* AllPhotos.swift */,
+				E720C32D231739540044C5D5 /* ScopePicker.swift */,
+				E720C32F231739800044C5D5 /* PhotoList.swift */,
+			);
+			path = AllPhotos;
+			sourceTree = "<group>";
+		};
 		E7933B102315E6D000ADC37F = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +135,7 @@
 				E7933B1C2315E6D000ADC37F /* AppDelegate.swift */,
 				E7933B1E2315E6D000ADC37F /* SceneDelegate.swift */,
 				E7933B202315E6D000ADC37F /* ContentView.swift */,
-				E7933B502315EE5800ADC37F /* AllPhotos.swift */,
+				E720C32C231739420044C5D5 /* AllPhotos */,
 				E7933B222315E6D100ADC37F /* Assets.xcassets */,
 				E7933B272315E6D100ADC37F /* LaunchScreen.storyboard */,
 				E7933B2A2315E6D100ADC37F /* Info.plist */,
@@ -301,7 +315,9 @@
 			files = (
 				E7933B512315EE5800ADC37F /* AllPhotos.swift in Sources */,
 				E7933B1D2315E6D000ADC37F /* AppDelegate.swift in Sources */,
+				E720C330231739800044C5D5 /* PhotoList.swift in Sources */,
 				E7933B1F2315E6D000ADC37F /* SceneDelegate.swift in Sources */,
+				E720C32E231739540044C5D5 /* ScopePicker.swift in Sources */,
 				E7933B212315E6D000ADC37F /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

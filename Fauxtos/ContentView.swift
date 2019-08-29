@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+var layout: SharedLayout = SharedLayout()
+
 struct ContentView: View {
     @State private var selection = 0
 
@@ -15,7 +17,7 @@ struct ContentView: View {
 
         TabView(selection: $selection){
             
-            AllPhotos()
+            AllPhotos().environmentObject(layout)
                 .font(.title)
                 .tabItem {
                     VStack {

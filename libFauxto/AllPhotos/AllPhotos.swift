@@ -54,22 +54,23 @@ struct Header: View {
                 // We want the gradient to extend to the edge of the screen. But then we want the
                 // contained text to respect safe area insets.
                 // Maybe the gradient should be in a ZStack?
-                Spacer(minLength: 45)
+                Spacer(minLength: 22)
                 HStack {
                     // TODO: Make a model for photos that includes date
                     // information that can be displayed here.
                     Text("\(Header.formatter.string(from: Date()))")
-                        .font(Font.largeTitle.bold())
+                        .font(Font.title.weight(.black))
                     Spacer()
                     Button(action: {
                         // TODO: Switch to select mode
                         print("TODO: switch to select mode")
                     }) {
                         Capsule()
-                            .frame(height: 30)
+                            .frame(width: 60, height: 28)
                             .overlay(Text("Select")
-                                .font(Font.callout.bold())
-                                .foregroundColor(.white))
+                                .font(Font.caption.bold())
+                                .foregroundColor(.white)
+                                .padding(0))
                             .foregroundColor(Color("PillButton", bundle: Bundle.init(for: SharedLayout.self)))
                     }
                 }
@@ -77,7 +78,7 @@ struct Header: View {
                     // TODO: Make a model for photos that includes location
                     // information that can be displayed here.
                     Text("Hong Kong")
-                        .font(Font.subheadline.bold())
+                        .font(Font.caption.bold())
                     Spacer()
                 }
             }

@@ -62,8 +62,8 @@ struct Header: View {
                         .font(Font.largeTitle.bold())
                     Spacer()
                     Button(action: {
-                        
-                        print("hi")
+                        // TODO: Switch to select mode
+                        print("TODO: switch to select mode")
                     }) {
                         Capsule()
                             .frame(height: 30)

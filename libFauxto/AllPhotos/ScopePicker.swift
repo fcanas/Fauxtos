@@ -58,7 +58,10 @@ struct ScopePicker: View {
                     .tag(s)
             }
         }
+            // TODO: Make the style _more_ like in Photos. BlurView below is one step.
         .pickerStyle(SegmentedPickerStyle())
+        .background(BlurView(style: .light)
+        .cornerRadius(15))
         .padding()
         .fixedSize()
         //        .onAppear {
@@ -73,4 +76,33 @@ struct ScopePicker: View {
 
 extension ScopePicker.Scope : Identifiable {
     var id: ScopePicker.Scope { self }
+}
+
+
+// Blur View by Matteo Pacini
+// https://github.com/Zi0P4tch0
+// https://stackoverflow.com/questions/56610957/is-there-a-method-to-blur-a-background-in-swiftui
+struct BlurView: UIViewRepresentable {
+
+    let style: UIBlurEffect.Style
+
+    func makeUIView(context: UIViewRepresentableContext<BlurView>) -> UIView {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+        let blurEffect = UIBlurEffect(style: style)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(blurView, at: 0)
+        NSLayoutConstraint.activate([
+            blurView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            blurView.widthAnchor.constraint(equalTo: view.widthAnchor),
+        ])
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView,
+                      context: UIViewRepresentableContext<BlurView>) {
+
+    }
+
 }

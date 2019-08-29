@@ -20,6 +20,7 @@
 		E7933B4A2315E70500ADC37F /* libFauxto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7933B432315E70500ADC37F /* libFauxto.framework */; };
 		E7933B4B2315E70500ADC37F /* libFauxto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E7933B432315E70500ADC37F /* libFauxto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E7933B512315EE5800ADC37F /* AllPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7933B502315EE5800ADC37F /* AllPhotos.swift */; };
+		E7F0F71A231865460038232C /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F0F719231865460038232C /* UIKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		E7933B452315E70500ADC37F /* libFauxto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libFauxto.h; sourceTree = "<group>"; };
 		E7933B462315E70500ADC37F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7933B502315EE5800ADC37F /* AllPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotos.swift; sourceTree = "<group>"; };
+		E7F0F719231865460038232C /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 				E7933B272315E6D100ADC37F /* LaunchScreen.storyboard */,
 				E7933B2A2315E6D100ADC37F /* Info.plist */,
 				E7933B242315E6D100ADC37F /* Preview Content */,
+				E7F0F71B2318654C0038232C /* Utilities */,
 			);
 			path = Fauxtos;
 			sourceTree = "<group>";
@@ -168,6 +171,14 @@
 				E7933B462315E70500ADC37F /* Info.plist */,
 			);
 			path = libFauxto;
+			sourceTree = "<group>";
+		};
+		E7F0F71B2318654C0038232C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E7F0F719231865460038232C /* UIKit.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +328,7 @@
 				E7933B1D2315E6D000ADC37F /* AppDelegate.swift in Sources */,
 				E720C330231739800044C5D5 /* PhotoList.swift in Sources */,
 				E7933B1F2315E6D000ADC37F /* SceneDelegate.swift in Sources */,
+				E7F0F71A231865460038232C /* UIKit.swift in Sources */,
 				E720C32E231739540044C5D5 /* ScopePicker.swift in Sources */,
 				E7933B212315E6D000ADC37F /* ContentView.swift in Sources */,
 			);

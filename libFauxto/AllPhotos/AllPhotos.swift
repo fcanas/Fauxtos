@@ -70,7 +70,7 @@ struct Header: View {
                             .overlay(Text("Select")
                                 .font(Font.callout.bold())
                                 .foregroundColor(.white))
-                            .foregroundColor(Color("PillButton"))
+                            .foregroundColor(Color("PillButton", bundle: Bundle.init(for: SharedLayout.self)))
                     }
                 }
                 HStack{

@@ -8,28 +8,7 @@
 
 import UIKit
 import SwiftUI
-
-/// Hosting View Controller for SwiftUI content.
-/// This hasn't received a proper name because it has no real responsiblities beyond
-/// things I believe should be handled from within SwiftUI. Everything is a hack.
-class HVC: UIHostingController<ContentView> {
-
-    override var preferredStatusBarStyle: UIStatusBarStyle  { .lightContent }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // ---!!!HACK!!!---
-        // How can I get a SwiftUI ScrollView to scroll to the bottom?
-        // Assume :
-        //   1. it's rendered by a UIScrollView (it is)
-        //   2. it's the only UIScrollView in the view hierarchy
-        //   3. That its content size, etc. is set up and ready to go when the view appears
-        //   4. Making the bottom of its content visible without animation happens immediately.
-        // This awful.
-        self.view.scrollViews().first?.scrollToBottom()
-    }
-
-}
+import libFauxto
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

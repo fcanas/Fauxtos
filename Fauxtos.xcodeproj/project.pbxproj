@@ -76,6 +76,7 @@
 		E7933B462315E70500ADC37F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7933B502315EE5800ADC37F /* AllPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotos.swift; sourceTree = "<group>"; };
 		E7AF38212318D84D00AF3A37 /* Photos.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Photos.json; sourceTree = "<group>"; };
+		E7AF38232318EA0D00AF3A37 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E7F0F719231865460038232C /* UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		E7F0F721231871790038232C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7F0F72323187F690038232C /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
@@ -120,6 +121,7 @@
 		E7933B102315E6D000ADC37F = {
 			isa = PBXGroup;
 			children = (
+				E7AF38232318EA0D00AF3A37 /* README.md */,
 				E7933B1B2315E6D000ADC37F /* Fauxtos */,
 				E7933B322315E6D100ADC37F /* FauxtosUITests */,
 				E7933B442315E70500ADC37F /* libFauxto */,

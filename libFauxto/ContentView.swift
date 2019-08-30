@@ -13,7 +13,7 @@ var layout: SharedLayout = SharedLayout()
 /// Hosting View Controller for SwiftUI content.
 /// This hasn't received a proper name because it has no real responsiblities beyond
 /// things I believe should be handled from within SwiftUI. Everything is a hack.
-public class HVC: UIHostingController<ContentView> {
+public class HVC<Content>: UIHostingController<Content> where Content : View {
 
     override public var preferredStatusBarStyle: UIStatusBarStyle  { .lightContent }
 

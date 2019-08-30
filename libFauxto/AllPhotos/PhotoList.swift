@@ -8,41 +8,31 @@
 
 import SwiftUI
 
-let allImages = [["rikki-chan-B8ZFV4E0YOw-unsplash",
-                  "casey-horner-T2l1NxKOsjY-unsplash",
-                  "hugues-de-buyer-mimeure-lQPEChtLjUo-unsplash",],
-                 ["will-turner-lqxMW8r-qJY-unsplash",
-                  "johan-mouchet-Z95viY3WaZs-unsplash",
-                  "matthew-henry-Ix1TiS-E17E-unsplash",],
-                 ["dawn-armfield-R9S19dOFlcs-unsplash",
-                  "jasper-van-der-meij-eKpO8DlBvo0-unsplash",
-                  "ethan-dow-6EljUULo4FQ-unsplash",],
-                 ["gerson-repreza-hniuowbXbBY-unsplash",
-                  "kevin-crosby-pqV9L0IThCI-unsplash",
-                  "benjamin-voros-jv15x2Gs5F8-unsplash",],
-                 ["daniel-norris-m_B6Rq976_E-unsplash",
-                  "sead-dedic-thD4QhhV1J8-unsplash",
-                  "joel-fulgencio-VSrHD079L78-unsplash"],
-                 ["sankalp-sharma-S2AIYYVyBLc-unsplash",
-                  "nicolas-hoizey-hfIMkIcIq_k-unsplash",
-                  "mark-hang-fung-so--qDAqOS_Chk-unsplash",],
-                 ["senor-sosa-9Kh9K2Cc5y0-unsplash",
-                  "brayden-law-F6YJRn46SMM-unsplash",
-                  "joel-fulgencio-pXKW6bBwsnA-unsplash",],
-                 //                 ["airam-dato-on-5AgkxBHhXg8-unsplash",
-    //                  "jamie-street-8_xzhWgK9wo-unsplash",
-    //                  "ethan-lee-RxpOfYtpoa0-unsplash",]
-]
-
 struct PhotoList: View {
     @EnvironmentObject var layout: SharedLayout
-    var images: [[String]] = allImages
+    @EnvironmentObject var mediaLibrary: MediaLibrary
+
+    var images: [[String]] {
+        return self.mediaLibrary.photos.reduce([[]]) { (result, photo) -> [[String]] in
+            var vResult = result
+
+            if vResult.last!.count == layout.imagesPerRow {
+                vResult.append([])
+            }
+
+            var vLast = vResult.last!
+            vLast.append(photo.assetName)
+            vResult[vResult.endIndex.advanced(by: -1)] = vLast
+
+            return vResult
+        }
+    }
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack(spacing: 4) {
+                VStack(spacing: self.layout.imageGridSpacing) {
                     ForEach(self.images, id: \.self) { i in
-                            PhotoRow(images: i)
+                        PhotoRow(images: i)
                     }
 
                     // ---!!!HACK!!!---
@@ -61,19 +51,20 @@ struct PhotoList: View {
 }
 
 struct PhotoRow: View {
+    @EnvironmentObject var layout: SharedLayout
     var images: [String]
     var body: some View {
         GeometryReader { geometry in
-            HStack(spacing: 4.0) {
+            HStack(spacing: self.layout.imageGridSpacing) {
                 ForEach(self.images, id: \.self) { imageName in
                     Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width / 3, height: (geometry.size.width / 3), alignment: .center)
+                        .frame(width: geometry.size.width / CGFloat(self.layout.imagesPerRow), height: (geometry.size.width / CGFloat(self.layout.imagesPerRow)), alignment: .center)
                         .clipped()
                 }
             }
         }
-        .aspectRatio(3, contentMode: .fill)
+        .aspectRatio(CGFloat(self.layout.imagesPerRow), contentMode: .fill)
     }
 }

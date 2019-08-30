@@ -19,6 +19,8 @@ class SharedLayout: ObservableObject {
     /// up father. But values less than the height don't make the area too
     /// small.
     var pickerHeight: CGFloat = 0.5
+    var imagesPerRow: Int = 3
+    var imageGridSpacing: CGFloat = 2.0
 }
 
 struct AllPhotos: View {

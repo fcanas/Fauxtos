@@ -18,15 +18,15 @@ class SharedLayout: ObservableObject {
     /// value here. Values more than the picker height do push the photos
     /// up father. But values less than the height don't make the area too
     /// small.
-    var pickerHeight: CGFloat = 0.5
-    var imagesPerRow: Int = 3
-    var imageGridSpacing: CGFloat = 2.0
+    /// Maybe it would be even better to have this in a more locally-scoped
+    /// environment object.
+    @Published var pickerHeight: CGFloat = 0.5
+    @Published var imagesPerRow: Int = 3
+    @Published var imageGridSpacing: CGFloat = 2.0
+
 }
 
 struct AllPhotos: View {
-
-    @EnvironmentObject var layout: SharedLayout
-
     var body: some View {
         ZStack{
             PhotoList()
@@ -40,54 +40,3 @@ struct AllPhotos: View {
     }
 }
 
-struct Header: View {
-
-    static var formatter: DateFormatter {
-        let f = DateFormatter()
-        f.dateStyle = .medium
-        return f
-    }
-
-    var body: some View {
-        Group {
-            VStack {
-                // ---!!!HACK!!!---
-                // how do I make the background ignore safe insets, but subviews respect them again?
-                // We want the gradient to extend to the edge of the screen. But then we want the
-                // contained text to respect safe area insets.
-                // Maybe the gradient should be in a ZStack?
-                Spacer(minLength: 22)
-                HStack {
-                    // TODO: Make a model for photos that includes date
-                    // information that can be displayed here.
-                    Text("\(Header.formatter.string(from: Date()))")
-                        .font(Font.title.weight(.black))
-                    Spacer()
-                    Button(action: {
-                        // TODO: Switch to select mode
-                        print("TODO: switch to select mode")
-                    }) {
-                        Capsule()
-                            .frame(width: 60, height: 28)
-                            .overlay(Text("Select")
-                                .font(Font.caption.bold())
-                                .foregroundColor(.white)
-                                .padding(0))
-                            .foregroundColor(Color("PillButton", bundle: Bundle.init(for: SharedLayout.self)))
-                    }
-                }
-                HStack{
-                    // TODO: Make a model for photos that includes location
-                    // information that can be displayed here.
-                    Text("Hong Kong")
-                        .font(Font.caption.bold())
-                    Spacer()
-                }
-            }
-        }
-        .padding()
-        .background(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), .clear]), startPoint: .top, endPoint: .bottom))
-        .edgesIgnoringSafeArea(.top)
-    }
-
-}

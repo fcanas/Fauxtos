@@ -52,19 +52,54 @@ struct PhotoList: View {
 
 struct PhotoRow: View {
     @EnvironmentObject var layout: SharedLayout
+
     var images: [String]
     var body: some View {
         GeometryReader { geometry in
             HStack(spacing: self.layout.imageGridSpacing) {
                 ForEach(self.images, id: \.self) { imageName in
-                    Image(imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
+                    PhotoCell(imageName: imageName)
                         .frame(width: geometry.size.width / CGFloat(self.layout.imagesPerRow), height: (geometry.size.width / CGFloat(self.layout.imagesPerRow)), alignment: .center)
                         .clipped()
                 }
             }
         }
         .aspectRatio(CGFloat(self.layout.imagesPerRow), contentMode: .fill)
+    }
+}
+
+struct PhotoCell: View {
+    @EnvironmentObject var layout: SharedLayout
+
+    @State var selected: Bool = false
+
+    var imageName: String
+    var body: some View {
+        ZStack {
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+            if self.layout.selecting {
+                Button (action: { self.selected = !self.selected }) {
+                    ZStack {
+                        Rectangle()
+                            .fill(Color
+                                .white
+                                .opacity(self.selected ? 0.25 : 0.0))
+                        if self.selected {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.blue)
+                                Image(systemName: "checkmark.circle")
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 25, height: 25, alignment: Alignment(horizontal: .trailing, vertical: .bottom))
+                        }
+                    }
+                }
+            } else {
+                EmptyView()
+            }
+        }
     }
 }

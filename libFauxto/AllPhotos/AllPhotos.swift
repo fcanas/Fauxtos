@@ -13,20 +13,17 @@ class SharedLayout: ObservableObject {
     /// a "content inset" for the photos view.
     /// ---!!!HACK!!!---
     /// Ideally, we'd be setting this and propagating it dynamically.
-    /// Also, the height of 0.5 here is bizarre. The scrolling content's
-    /// bottom jumps up above the picker view with seemingly _any_ positive
-    /// value here. Values more than the picker height do push the photos
-    /// up father. But values less than the height don't make the area too
-    /// small.
     /// Maybe it would be even better to have this in a more locally-scoped
     /// environment object.
-    @Published var pickerHeight: CGFloat = 0.5
+    @Published var pickerHeight: CGFloat = 55.0
     @Published var imagesPerRow: Int = 3
     @Published var imageGridSpacing: CGFloat = 2.0
 
+    @Published var selecting: Bool = false
 }
 
 struct AllPhotos: View {
+    @EnvironmentObject var layout: SharedLayout
     var body: some View {
         ZStack{
             PhotoList()
@@ -34,7 +31,9 @@ struct AllPhotos: View {
                 Header()
                     .environment(\.colorScheme, .dark)
                 Spacer()
-                ScopePicker()
+                if !self.layout.selecting {
+                    ScopePicker()
+                }
             }
         }
     }

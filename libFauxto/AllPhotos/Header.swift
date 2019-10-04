@@ -19,10 +19,10 @@ struct Header: View {
     var body: some View {
             VStack {
                 // ---!!!HACK!!!---
-                // how do I make the background ignore safe insets, but subviews respect them again?
-                // We want the gradient to extend to the edge of the screen. But then we want the
-                // contained text to respect safe area insets.
-                // Maybe the gradient should be in a ZStack?
+                // how do I make the background ignore safe insets, but subviews
+                // respect them again? We want the gradient to extend to the edge
+                // of the screen. But then we want the contained text to respect
+                // safe area insets. Maybe the gradient should be in a ZStack?
                 Spacer()
                     .frame(height: 22)
                 HStack {
@@ -55,7 +55,6 @@ struct HeaderActions: View {
     @EnvironmentObject var layout: SharedLayout
 
     @State private var zooming: Bool = false
-    @State private var selecting: Bool = false
 
     var body: some View {
 
@@ -63,7 +62,7 @@ struct HeaderActions: View {
             return AnyView(zoomingLayout)
         }
 
-        if self.selecting {
+        if self.layout.selecting {
             return AnyView(selectingLayout)
         }
 
@@ -90,7 +89,7 @@ struct HeaderActions: View {
         HStack {
             Button(action: {
                 // TODO: Switch to select mode
-                self.selecting = true
+                self.layout.selecting = true
             }) {
                 Capsule()
                     .frame(width: 60, height: 28)
@@ -108,7 +107,7 @@ struct HeaderActions: View {
         HStack {
             Button(action: {
                 // TODO: Switch to select mode
-                self.selecting = false
+                self.layout.selecting = false
             }) {
                 Capsule()
                     .frame(width: 60, height: 28)

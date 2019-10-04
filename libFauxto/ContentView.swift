@@ -46,10 +46,9 @@ public struct ContentView: View {
                 .font(.title)
                 .tabItem {
                     VStack {
-                        // TODO: This SFSymbol wants .fill, but it's been missing for the last few betas
-                        Image(systemName: "photo.on.rectangle")
+                        Image(systemName: "photo.fill.on.rectangle.fill")
                             .font(Font.system(size: 22))
-                        Text("All Photos")
+                        Text("Photos")
                     }
             }
             .tag(0)

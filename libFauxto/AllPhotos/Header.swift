@@ -17,30 +17,32 @@ struct Header: View {
     }
 
     var body: some View {
-            VStack {
-                // ---!!!HACK!!!---
-                // how do I make the background ignore safe insets, but subviews
-                // respect them again? We want the gradient to extend to the edge
-                // of the screen. But then we want the contained text to respect
-                // safe area insets. Maybe the gradient should be in a ZStack?
+        VStack {
+            // ---!!!HACK!!!---
+            // how do I make the background ignore safe insets, but subviews
+            // respect them again? We want the gradient to extend to the edge
+            // of the screen. But then we want the contained text to respect
+            // safe area insets. Maybe the gradient should be in a ZStack?
+            Spacer()
+                .frame(height: 22)
+            HStack {
+                // TODO: Make a model for photos that includes date
+                // information that can be displayed here.
+                Text("\(Header.formatter.string(from: Date()))")
+                    .font(Font.title.weight(.black))
+                    .foregroundColor(.white)
                 Spacer()
-                    .frame(height: 22)
-                HStack {
-                    // TODO: Make a model for photos that includes date
-                    // information that can be displayed here.
-                    Text("\(Header.formatter.string(from: Date()))")
-                        .font(Font.title.weight(.black))
-                    Spacer()
-                    HeaderActions()
-                }
-                HStack{
-                    // TODO: Make a model for photos that includes location
-                    // information that can be displayed here.
-                    Text("Hong Kong")
-                        .font(Font.caption.bold())
-                    Spacer()
-                }
+                HeaderActions()
             }
+            HStack{
+                // TODO: Make a model for photos that includes location
+                // information that can be displayed here.
+                Text("Hong Kong")
+                    .font(Font.caption.bold())
+                    .foregroundColor(.white)
+                Spacer()
+            }
+        }
         .padding( EdgeInsets(top: 32, leading: 24, bottom: 0, trailing: 24) )
         .background(LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.5), .clear]), startPoint: .top, endPoint: .bottom))
         .edgesIgnoringSafeArea(.top)
@@ -75,13 +77,13 @@ struct HeaderActions: View {
             print("TODO: switch to add remove row mode")
             self.zooming = true
         }) {
-            Capsule()
+            BlurView()
+                .cornerRadius(15)
                 .frame(width: 28, height: 28)
                 .overlay(Image(systemName: "plus.slash.minus")
                     .font(Font.caption.bold())
                     .foregroundColor(.white)
                     .padding(0))
-                .foregroundColor(self.buttonColor)
         }
     }
 
@@ -91,13 +93,13 @@ struct HeaderActions: View {
                 // TODO: Switch to select mode
                 self.layout.selecting = true
             }) {
-                Capsule()
+                BlurView()
+                    .cornerRadius(15)
                     .frame(width: 60, height: 28)
                     .overlay(Text("Select")
                         .font(Font.caption.bold())
                         .foregroundColor(.white)
                         .padding(0))
-                    .foregroundColor(buttonColor)
             }
             zoomButton
         }
@@ -109,7 +111,8 @@ struct HeaderActions: View {
                 // TODO: Switch to select mode
                 self.layout.selecting = false
             }) {
-                Capsule()
+                BlurView()
+                    .cornerRadius(15)
                     .frame(width: 60, height: 28)
                     .overlay(Text("Cancel")
                         .font(Font.caption.bold())

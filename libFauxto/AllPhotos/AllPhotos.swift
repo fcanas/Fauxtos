@@ -29,7 +29,6 @@ struct AllPhotos: View {
             PhotoList()
             VStack {
                 Header()
-                    .environment(\.colorScheme, .dark)
                 Spacer()
                 if !self.layout.selecting {
                     ScopePicker()

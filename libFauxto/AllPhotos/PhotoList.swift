@@ -30,7 +30,7 @@ struct PhotoList: View {
     var body: some View {
         GeometryReader { geometry in
             ScrollView {
-                VStack(spacing: self.layout.imageGridSpacing) {
+                VStack(spacing: self.layout.imageGridSpacing / 2.0) {
                     ForEach(self.images, id: \.self) { i in
                         PhotoRow(images: i)
                     }
@@ -58,9 +58,8 @@ struct PhotoRow: View {
         GeometryReader { geometry in
             HStack(spacing: self.layout.imageGridSpacing) {
                 ForEach(self.images, id: \.self) { imageName in
-                    PhotoCell(imageName: imageName)
-                        .frame(width: geometry.size.width / CGFloat(self.layout.imagesPerRow), height: (geometry.size.width / CGFloat(self.layout.imagesPerRow)), alignment: .center)
-                        .clipped()
+                    PhotoCell(size: (geometry.size.width / CGFloat(self.layout.imagesPerRow)) - (CGFloat(self.layout.imagesPerRow - 1) * self.layout.imageGridSpacing) / CGFloat(self.layout.imagesPerRow),
+                              imageName: imageName)
                 }
             }
         }
@@ -73,33 +72,69 @@ struct PhotoCell: View {
 
     @State var selected: Bool = false
 
+    var size: CGFloat
     var imageName: String
     var body: some View {
         ZStack {
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
+                .frame(width: size, height: size)
+                .clipped()
             if self.layout.selecting {
-                Button (action: { self.selected = !self.selected }) {
-                    ZStack {
-                        Rectangle()
-                            .fill(Color
-                                .white
-                                .opacity(self.selected ? 0.25 : 0.0))
-                        if self.selected {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.blue)
-                                Image(systemName: "checkmark.circle")
-                                    .foregroundColor(.white)
-                            }
-                            .frame(width: 25, height: 25, alignment: Alignment(horizontal: .trailing, vertical: .bottom))
-                        }
-                    }
-                }
-            } else {
-                EmptyView()
+                SelectionOverlay(selected: selected)
             }
         }
     }
 }
+
+struct SelectionOverlay: View {
+    @State var selected: Bool
+    var body: some View {
+        Button (action: { self.selected = !self.selected }) {
+            ZStack {
+                Rectangle()
+                    .fill(Color
+                        .white
+                        .opacity(self.selected ? 0.25 : 0.0))
+                if self.selected {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            CheckMark()
+                            .padding(3)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct CheckMark: View {
+
+    // TODO: How to make this view honor things like
+    // foregroundColor and backgroundColor from modifiers, or... whetever
+    var backgroundColor: Color = .blue
+    var foregroundColor: Color = .white
+    var size: CGFloat = 25
+
+    var body: some View {
+        ZStack {
+            // Dropshadow
+            Circle()
+                .fill(Color.black
+                    .opacity(0.7))
+                .blur(radius: 5)
+            // Background
+            Circle()
+                .fill(backgroundColor)
+            // Symbol
+            Image(systemName: "checkmark.circle").font(Font.system(size: size, weight: .light))
+                .foregroundColor(foregroundColor)
+        }
+        .frame(width: size, height: size)
+    }
+}
+

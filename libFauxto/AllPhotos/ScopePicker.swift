@@ -42,16 +42,15 @@ struct ScopePicker: View {
 
     var body: some View {
         // TODO:
-        // I would like to use a geometry reader to get the height of the picker to inject into the shared layout
-        // but I'm encountering two problems:
-        // 1: wrapping the picker in a GeometryReader seems to expand the size the picker occupies:
-        // 2: when the ScrollView in the photos scroller reads the value, it won't have been set by this or
-        //    any descendent components. So it'll be 0. And the value won't be re-read when it updates.
+        // I would like to use a geometry reader to get the height of the
+        // picker to inject into the shared layout but I'm encountering
+        // two problems:
+        // 1: wrapping the picker in a GeometryReader seems to expand the
+        //    size the picker occupies.
+        // 2: when the ScrollView in the photos scroller reads the value,
+        //    it won't have been set by this or any descendent components.
+        //    So it'll be 0. And the value won't be re-read when it updates.
 
-        // Code left commented below for convenient uncommenting, and as a guide for things I've tried.
-
-        //        GeometryReader { geometry in
-        //        Group {// geometry in
         Picker(selection: self.$scope, label: EmptyView()) {
             ForEach(Scope.allCases, id: \.self) { s in
                 Text(s.name)
@@ -59,17 +58,11 @@ struct ScopePicker: View {
             }
         }
             // TODO: Make the style _more_ like in Photos. BlurView below is one step.
-        .pickerStyle(SegmentedPickerStyle())
-        .background(BlurView()
-        .cornerRadius(15))
-        .padding()
-        .fixedSize()
-        //        .onAppear {
-        //            self.layout.pickerHeight = geometry.size.height
-        //        }
-        //        }
-        //        }
-        //                .padding(0)
+            .pickerStyle(SegmentedPickerStyle())
+            .background(BlurView()
+                .cornerRadius(15))
+            .padding()
+            .fixedSize()
     }
 
 }
@@ -87,8 +80,6 @@ struct BlurView: UIViewRepresentable {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     let style: UIBlurEffect.Style? = nil
-
-
 
     func makeUIView(context: UIViewRepresentableContext<BlurView>) -> UIView {
         let view = UIView(frame: .zero)
